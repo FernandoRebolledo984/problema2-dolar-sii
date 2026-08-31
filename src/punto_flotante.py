@@ -8,7 +8,6 @@ for linea in datos["dolar_observado_promedio_clp"]:
     if len(linea_str) <= 6:
         if int(linea_str[2]) >= 5:
             aux = float(linea+10)
-            #arreglao = float(aux)
             listaArreglados.append(aux)
         else:
             listaArreglados.append(float(linea))
