@@ -1,9 +1,10 @@
 from cargar_datos import datos
 import os
 os.system('cls' if os.name == 'nt' else 'clear')
-print(datos["dolar_observado_promedio_clp"])
 
+print(datos["dolar_observado_promedio_clp"])
 listaArreglados = []
+print(listaArreglados)
 for linea in datos["dolar_observado_promedio_clp"]:
     linea_str = str(linea)
     if len(linea_str) <= 6:
@@ -18,5 +19,3 @@ for linea in datos["dolar_observado_promedio_clp"]:
             listaArreglados.append(aux)
         else:
             listaArreglados.append(float(linea))
-
-print(listaArreglados)
