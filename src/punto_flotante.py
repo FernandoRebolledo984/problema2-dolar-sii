@@ -16,3 +16,4 @@ while i <= len(datos["dolar_observado_promedio_clp"]):
     listaErrores.append(listaOriginales[i] - Arreglados_y_Significativos[i])
     pass
 
+print(listaErrores)
