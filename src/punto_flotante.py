@@ -19,3 +19,4 @@ for linea in datos["dolar_observado_promedio_clp"]:
         else:
             listaArreglados.append(float(linea))
 
+print(listaArreglados)
