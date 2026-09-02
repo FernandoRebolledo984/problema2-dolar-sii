@@ -1,15 +1,13 @@
-from punto_flotante import listaErrores, Arreglados_y_Significativos, listaOriginales
+from punto_flotante import listaErrores as errorAbsoluto, Arreglados_y_Significativos, listaOriginales as valorVerdadero
 import os
 
 os.system('cls' if os.name == 'nt' else 'clear')
 
-valoeVerdadero = listaOriginales
-errorAbsoluto = listaErrores
 errorRelativo = []
 
 i = 0
 while i < len(Arreglados_y_Significativos):
-    errorRelativo.append((errorAbsoluto[i]/valoeVerdadero[i])*100)
+    errorRelativo.append((errorAbsoluto[i]/valorVerdadero[i])*100)
     i = i+1
 
 
