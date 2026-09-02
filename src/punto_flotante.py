@@ -16,4 +16,4 @@ while i < len(datos["dolar_observado_promedio_clp"]):
     i = i+1
     pass
 
-print(listaErrores)
+
