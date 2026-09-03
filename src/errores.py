@@ -16,9 +16,19 @@ monto = 1000000
 
 #DIVISION (COMPRA DOLARES) USD = MONTO / PRECIO_COMPRA
 
-USD = []
+usdCompra = []
 
 for i in Arreglados_y_Significativos:
-    USD.append(monto/i)
+    usdCompra.append(monto/i)
 
-print(USD)
+
+#MULTIPLICACION (VENDER DOLARES) PESO_FINAL = USD X PRECIO_VENTA
+
+pesoFinal = []
+
+i = 0
+while i < len(Arreglados_y_Significativos):
+    pesoFinal.append(usdCompra[i]*Arreglados_y_Significativos[i])
+    i = i+1
+
+print(pesoFinal)
