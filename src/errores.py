@@ -10,4 +10,15 @@ while i < len(Arreglados_y_Significativos):
     errorRelativo.append((errorAbsoluto[i]/valorVerdadero[i])*100)
     i = i+1
 
-##OPERACIONES DE PROPAGACIÓN (UNA DE CADA UNA)##          
+#OPERACIONES DE PROPAGACIÓN (UNA DE CADA UNA)##          
+
+monto = 1000000
+
+#DIVISION (COMPRA DOLARES) USD = MONTO / PRECIO_COMPRA
+
+USD = []
+
+for i in Arreglados_y_Significativos:
+    USD.append(monto/i)
+
+print(USD)
