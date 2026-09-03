@@ -10,7 +10,7 @@ while i < len(Arreglados_y_Significativos):
     errorRelativo.append((errorAbsoluto[i]/valorVerdadero[i])*100)
     i = i+1
 
-#OPERACIONES DE PROPAGACIÓN (UNA DE CADA UNA)##          
+#################################################OPERACIONES DE PROPAGACIÓN (UNA DE CADA UNA)########################################################################################        
 
 monto = 1000000
 
@@ -31,4 +31,12 @@ while i < len(Arreglados_y_Significativos):
     pesoFinal.append(usdCompra[i]*Arreglados_y_Significativos[i])
     i = i+1
 
-print(pesoFinal)
+#RESTA (GANANCIA) GANANCIA = PESO_FINAL - MONTO
+
+ganancia = []
+
+j = 0
+while j < len(pesoFinal):
+    ganancia.append(pesoFinal[j] - monto)
+
+print(monto)
