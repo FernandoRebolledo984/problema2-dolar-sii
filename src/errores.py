@@ -10,33 +10,22 @@ while i < len(Arreglados_y_Significativos):
     errorRelativo.append((errorAbsoluto[i]/valorVerdadero[i])*100)
     i = i+1
 
-#################################################OPERACIONES DE PROPAGACIÓN (UNA DE CADA UNA)########################################################################################        
+#################################################OPERACIONES DE PROPAGACIÓN########################################################################################        
 
-monto = 1000000
+monto = 1_000_000
 
-#DIVISION (COMPRA DOLARES) USD = MONTO / PRECIO_COMPRA
+# 1. Compras en un mes específico
+precio_compra = Arreglados_y_Significativos[0]  # Enero 2022
+usd_comprados = monto / precio_compra
 
-usdCompra = []
+# 2. Vendes en un mes diferente
+precio_venta = Arreglados_y_Significativos[6]   # Julio 2022
+pesos_final = usd_comprados * precio_venta
 
-for i in Arreglados_y_Significativos:
-    usdCompra.append(monto/i)
+# 3. Ganancia real
+ganancia_real = pesos_final - monto
 
-
-#MULTIPLICACION (VENDER DOLARES) PESO_FINAL = USD X PRECIO_VENTA
-
-pesoFinal = []
-
-i = 0
-while i < len(Arreglados_y_Significativos):
-    pesoFinal.append(usdCompra[i]*Arreglados_y_Significativos[i])
-    i = i+1
-
-#RESTA (GANANCIA) GANANCIA = PESO_FINAL - MONTO
-
-ganancia = []
-
-j = 0
-while j < len(pesoFinal):
-    ganancia.append(pesoFinal[j] - monto)
-
-print(monto)
+print(usd_comprados)
+print(pesos_final)
+print(ganancia_real)
+print(errorRelativo)
