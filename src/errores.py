@@ -13,22 +13,22 @@ while i < len(Arreglados_y_Significativos):
 #################################################OPERACIONES DE PROPAGACIÓN########################################################################################        
 
 monto = 1_000_000
-errorCompra = errorAbsoluto[0]
-errorVenta = errorAbsoluto[6]
+errorCompra = errorRelativo[0]
+errorVenta = errorRelativo[6]
 
-# 1. Compras en un mes específico
+#Compras mes específico
 precio_compra = Arreglados_y_Significativos[0]  # Enero 2022
 usd_comprados = monto / precio_compra
 
 errorDolar = errorCompra + 0 #0 ya que se suma el error de compra mas el error de monto que es 0
 
-# 2. Vendes en un mes diferente
+#Vendes mes diferente
 precio_venta = Arreglados_y_Significativos[6]   # Julio 2022
 pesos_final = usd_comprados * precio_venta
 
 errorPesoFinal = errorDolar + errorVenta
 
-# 3. Ganancia real
+#Ganancia real
 ganancia_real = pesos_final - monto
 
 errorAbsolutoPesoFinal = (errorPesoFinal/100)*pesos_final
