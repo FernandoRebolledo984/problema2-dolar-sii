@@ -38,4 +38,6 @@ print(errorAbsolutoPesoFinal)
 
 print(f"Por lo que las ganancias son: {ganancia_real:.2f} +/- {errorGanancia:.2f}.")
 
+##################CANCELACIÓN########################
+
 
