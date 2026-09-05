@@ -7,13 +7,12 @@ listaOriginales = []
 for num in datos["dolar_observado_promedio_clp"]:
     listaOriginales.append(float(num))
 
+#Redondeamos y truncamos los numeros a 2 cifras significativas
 Arreglados_y_Significativos = [float(f"{num:.2g}") for num in listaOriginales]
+
+#Error de redondeo por cada mes
 i = 0
 listaErrores = []
-
 while i < len(datos["dolar_observado_promedio_clp"]):
-    listaErrores.append(listaOriginales[i] - Arreglados_y_Significativos[i])
+    listaErrores.append(abs(listaOriginales[i] - Arreglados_y_Significativos[i]))
     i = i+1
-    pass
-
-
