@@ -1,4 +1,4 @@
-from punto_flotante import listaOriginales
+from punto_flotante import Arreglados_y_Significativos, listaErrores
 
 #De enero a dic de cada año cuanto ganó o perdió el dolar ...
 #Para poder verlo tenemos que restar enero - dic de cada año, tomando los índices correspondientes de 
