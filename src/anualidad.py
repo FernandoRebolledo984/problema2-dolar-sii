@@ -22,10 +22,8 @@ erroes_diciembre = [listaErrores[11],listaErrores[23],listaErrores[35],listaErro
 propagacion_erroes_resta = []
 j = 0
 while j < len(enero_anios):
-    propagacion_erroes_resta.append(enero_anios[j] + erroes_diciembre[j])
+    propagacion_erroes_resta.append(erroes_enero[j] + erroes_diciembre[j])
     j = j+1
 
-print(listaErrores)
-print(propagacion_erroes_resta)
 
 print("//////////LISTA DE DIFERENCIAS ENE-DIC Y SUS ERRORES CORRESPONDIENTES//////////")
