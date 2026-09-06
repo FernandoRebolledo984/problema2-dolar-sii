@@ -9,8 +9,8 @@ os.system('cls' if os.name == 'nt' else 'clear')
 
 enero_anios = [Arreglados_y_Significativos[0],Arreglados_y_Significativos[12],Arreglados_y_Significativos[24],Arreglados_y_Significativos[36]]
 diciembre_anios = [Arreglados_y_Significativos[11],Arreglados_y_Significativos[23], Arreglados_y_Significativos[35],Arreglados_y_Significativos[47]]
-resta_enero_diciembre = []
 
+resta_enero_diciembre = []
 i = 0
 while i < len(enero_anios):
     resta_enero_diciembre.append(diciembre_anios[i] - enero_anios[i])
@@ -19,5 +19,13 @@ while i < len(enero_anios):
 erroes_enero = [listaErrores[0],listaErrores[12],listaErrores[24],listaErrores[36]]
 erroes_diciembre = [listaErrores[11],listaErrores[23],listaErrores[35],listaErrores[47]]
 
+propagacion_erroes_resta = []
+j = 0
+while j < len(enero_anios):
+    propagacion_erroes_resta.append(enero_anios[j] + erroes_diciembre[j])
+    j = j+1
+
+print(listaErrores)
+print(propagacion_erroes_resta)
 
 print("//////////LISTA DE DIFERENCIAS ENE-DIC Y SUS ERRORES CORRESPONDIENTES//////////")
