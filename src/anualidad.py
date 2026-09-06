@@ -4,3 +4,7 @@ from punto_flotante import Arreglados_y_Significativos, listaErrores
 #Para poder verlo tenemos que restar enero - dic de cada año, tomando los índices correspondientes de 
 #cada elemento en la lista
 
+enero_diciembre_anios = []
+
+for mes in Arreglados_y_Significativos:
+    pass
