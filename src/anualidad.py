@@ -16,6 +16,3 @@ while i < len(enero_anios):
     resta_enero_diciembre.append(diciembre_anios[i] - enero_anios[i])
     i = i+1
 
-print(enero_anios)
-print(diciembre_anios)
-print(resta_enero_diciembre)
