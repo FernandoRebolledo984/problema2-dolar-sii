@@ -16,3 +16,8 @@ while i < len(enero_anios):
     resta_enero_diciembre.append(diciembre_anios[i] - enero_anios[i])
     i = i+1
 
+erroes_enero = [listaErrores[0],listaErrores[12],listaErrores[24],listaErrores[36]]
+erroes_diciembre = [listaErrores[11],listaErrores[23],listaErrores[35],listaErrores[47]]
+
+
+print("//////////LISTA DE DIFERENCIAS ENE-DIC Y SUS ERRORES CORRESPONDIENTES//////////")
