@@ -6,6 +6,16 @@ os.system('cls' if os.name == 'nt' else 'clear')
 #Para poder verlo tenemos que restar enero - dic de cada año, tomando los índices correspondientes de 
 #cada elemento en la lista
 
-print(Arreglados_y_Significativos)
-enero_diciembre_anios = [Arreglados_y_Significativos[0], Arreglados_y_Significativos[11],Arreglados_y_Significativos[12],Arreglados_y_Significativos[23],Arreglados_y_Significativos[24], Arreglados_y_Significativos[35], Arreglados_y_Significativos[36],Arreglados_y_Significativos[47]]
-print(enero_diciembre_anios)
+
+enero_anios = [Arreglados_y_Significativos[0],Arreglados_y_Significativos[12],Arreglados_y_Significativos[24],Arreglados_y_Significativos[36]]
+diciembre_anios = [Arreglados_y_Significativos[11],Arreglados_y_Significativos[23], Arreglados_y_Significativos[35],Arreglados_y_Significativos[47]]
+resta_enero_diciembre = []
+
+i = 0
+while i < len(enero_anios):
+    resta_enero_diciembre.append(diciembre_anios[i] - enero_anios[i])
+    i = i+1
+
+print(enero_anios)
+print(diciembre_anios)
+print(resta_enero_diciembre)
