@@ -34,8 +34,6 @@ while l < len(propagacion_erroes_resta):
     propagacion_porcentual.append(abs((propagacion_erroes_resta[l]/resta_enero_diciembre[l])*100))
     l = l+1
 
-#print("========== LISTA DE DIFERENCIAS ENE-DIC Y SUS ERRORES CORRESPONDIENTES ==========")
-
 k = 0
 ulti = [[],[],[],[]]
 while k < len(resta_enero_diciembre):
@@ -43,18 +41,27 @@ while k < len(resta_enero_diciembre):
     ulti[k].append(propagacion_erroes_resta[k])
     ulti[k].append(propagacion_porcentual[k])
     k = k+1
-print(ulti)
 
 propagacion_porcentual.sort()
 x=0
 y=2
 z=0
+anio=2022
 ulti2=[]
 while x<len(ulti):
     if propagacion_porcentual[x] == ulti[z][y]:
         ulti2.append(ulti[z])
+        ulti2[x].append(anio)
         z=0
+        anio=2022
         x+=1
     else:
         z+=1
-print(ulti2)
+        anio+=1
+
+print("\n========== DIFERENCIAS ENE-DIC Y SUS ERRORES CORRESPONDIENTES ==========")
+print("===== Porcentajes orenados de menor a mayor =====\n")
+h=0
+while h < len(ulti2):
+    print(f" - Año: {ulti2[h][3]}\n - Error Absoluto Enero-Diciembre: {ulti2[h][0]}\n - Propagación de Error: {round(ulti2[h][1],5)}\n - Error Relativo Porcentual: {round(ulti2[h][2],3)}%\n")
+    h+=1
