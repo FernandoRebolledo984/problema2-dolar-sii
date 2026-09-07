@@ -25,10 +25,16 @@ while j < len(enero_anios):
     propagacion_erroes_resta.append(erroes_enero[j] + erroes_diciembre[j])
     j = j+1
 
+propagacion_porcentual = []
+l = 0
+while l < len(propagacion_erroes_resta):
+    propagacion_porcentual.append((propagacion_erroes_resta[l]/resta_enero_diciembre[l])*100)
+    l = l+1
 
 print("//////////LISTA DE DIFERENCIAS ENE-DIC Y SUS ERRORES CORRESPONDIENTES//////////")
 
 k = 0
 while k < len(resta_enero_diciembre):
-    print(f"{resta_enero_diciembre[k]:.2f} +/- {propagacion_erroes_resta[k]:.2f}")
+    print(f"{resta_enero_diciembre[k]:.2f} +/- {propagacion_erroes_resta[k]:.2f} o {propagacion_porcentual[k]:.2f}%")
     k = k+1
+
