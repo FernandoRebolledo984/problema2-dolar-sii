@@ -27,3 +27,8 @@ while j < len(enero_anios):
 
 
 print("//////////LISTA DE DIFERENCIAS ENE-DIC Y SUS ERRORES CORRESPONDIENTES//////////")
+
+k = 0
+while k < len(resta_enero_diciembre):
+    print(f"{resta_enero_diciembre[k]:.2f} +/- {propagacion_erroes_resta[k]:.2f}")
+    k = k+1
