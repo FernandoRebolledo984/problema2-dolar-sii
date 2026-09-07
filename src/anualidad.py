@@ -10,6 +10,7 @@ os.system('cls' if os.name == 'nt' else 'clear')
 enero_anios = [Arreglados_y_Significativos[0],Arreglados_y_Significativos[12],Arreglados_y_Significativos[24],Arreglados_y_Significativos[36]]
 diciembre_anios = [Arreglados_y_Significativos[11],Arreglados_y_Significativos[23], Arreglados_y_Significativos[35],Arreglados_y_Significativos[47]]
 
+# Error absoluto
 resta_enero_diciembre = []
 i = 0
 while i < len(enero_anios):
@@ -19,22 +20,41 @@ while i < len(enero_anios):
 erroes_enero = [listaErrores[0],listaErrores[12],listaErrores[24],listaErrores[36]]
 erroes_diciembre = [listaErrores[11],listaErrores[23],listaErrores[35],listaErrores[47]]
 
+# Propagación de error
 propagacion_erroes_resta = []
 j = 0
 while j < len(enero_anios):
     propagacion_erroes_resta.append(erroes_enero[j] + erroes_diciembre[j])
     j = j+1
 
+# Error relativo porcentual
 propagacion_porcentual = []
 l = 0
 while l < len(propagacion_erroes_resta):
-    propagacion_porcentual.append((propagacion_erroes_resta[l]/resta_enero_diciembre[l])*100)
+    propagacion_porcentual.append(abs((propagacion_erroes_resta[l]/resta_enero_diciembre[l])*100))
     l = l+1
 
-print("//////////LISTA DE DIFERENCIAS ENE-DIC Y SUS ERRORES CORRESPONDIENTES//////////")
+#print("========== LISTA DE DIFERENCIAS ENE-DIC Y SUS ERRORES CORRESPONDIENTES ==========")
 
 k = 0
+ulti = [[],[],[],[]]
 while k < len(resta_enero_diciembre):
-    print(f"{resta_enero_diciembre[k]:.2f} +/- {propagacion_erroes_resta[k]:.2f} o {propagacion_porcentual[k]:.2f}%")
+    ulti[k].append(resta_enero_diciembre[k])
+    ulti[k].append(propagacion_erroes_resta[k])
+    ulti[k].append(propagacion_porcentual[k])
     k = k+1
+print(ulti)
 
+propagacion_porcentual.sort()
+x=0
+y=2
+z=0
+ulti2=[]
+while x<len(ulti):
+    if propagacion_porcentual[x] == ulti[z][y]:
+        ulti2.append(ulti[z])
+        z=0
+        x+=1
+    else:
+        z+=1
+print(ulti2)
