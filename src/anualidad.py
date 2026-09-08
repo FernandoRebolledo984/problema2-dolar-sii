@@ -1,4 +1,5 @@
 from punto_flotante import Arreglados_y_Significativos, listaErrores, listaOriginales
+from cargar_datos import datos
 import os
 os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -67,12 +68,17 @@ print("Lo común de ambos años es que su error absoluto llega a ser igual o may
 print("\n=== Respuesta A5. Mejor compra y mejor venta ===\n")
 
 monto = 1_000_000
-precio_mes_barato = min(listaOriginales)   #Mes más barato del período
-precio_mes_caro = max(listaOriginales)     #Mes más caro del período
-indice_barato = listaOriginales.index(precio_mes_barato)
-indice_caro = listaOriginales.index(precio_mes_caro)
-#mes_barato = 
-#anio_barato =
+precio_mes_barato = min(Arreglados_y_Significativos)   #Mes más barato del período
+precio_mes_caro = max(Arreglados_y_Significativos)     #Mes más caro del período
+indice_barato = Arreglados_y_Significativos.index(precio_mes_barato)
+indice_caro = Arreglados_y_Significativos.index(precio_mes_caro)
+#Nombre del mes y año de mes barato y caro
+fila_barato = datos[indice_barato]
+fila_caro = datos[indice_caro]
+nombre_mes_barato = fila_barato[1]
+anio_mes_barato = fila_barato[0]
+nombre_mes_caro = fila_caro[1]
+anio_mes_caro = fila_caro[0]
 
 #Rentabilidad
 compra_barato = monto / precio_mes_barato    #Compramos en el mes más barato
@@ -82,14 +88,28 @@ rentabilidad = (ganancia / monto)*100 #Porcentaje de rentabilidad
 
 #Errores relativos y absolutos de ambos meses
 error_relativo_barato = (listaErrores[indice_barato] / precio_mes_barato)*100
-error_absoluto_barato = abs((precio_mes_barato - Arreglados_y_Significativos[indice_barato]))
+error_absoluto_barato = abs((listaOriginales[indice_barato] - precio_mes_barato))
 error_relativo_caro = (listaErrores[indice_caro] / precio_mes_caro)*100
-error_absoluto_caro = (precio_mes_caro - Arreglados_y_Significativos[indice_caro])
+error_absoluto_caro = (listaOriginales[indice_caro] - precio_mes_caro)
 #Error relativo y absoluto de la venta
 error_relativo_venta = error_relativo_barato + error_relativo_caro
 error_absoluto_venta = (error_relativo_venta / 100) * vende_caro
 
 error_absoluto_ganancia = error_absoluto_venta
 error_absoluto_rentabilidad = (error_absoluto_ganancia / monto)*100
+es_confiable = ganancia/error_absoluto_ganancia
 
-print(error_absoluto_rentabilidad)
+print(f"=== Datos del mes más barato y caro ===")
+print(f" - Mes y año del mes más barato: {nombre_mes_barato} de {anio_mes_barato}")
+print(f" - Precio del mes más barato: {precio_mes_barato}")
+print(f" - Mes y año del mes más caro: {nombre_mes_caro} de {anio_mes_caro}")
+print(f" - Precio del mes más barato: {precio_mes_caro}\n")
+
+print("=== Resultados financieros ===")
+print(f" - Ganancia neta: ${ganancia:,.2f} CLP +/- ${error_absoluto_barato:,.2f} CLP")
+print(f" - Rentabilidad: ${rentabilidad:,.2f} CLP +/- {error_absoluto_rentabilidad:,.2f}%\n")
+
+if ganancia > error_absoluto_ganancia:
+    print(f"La ganancia es mayor a la incertidumbre propagada por el redondeo ({es_confiable:.1f} veces mayor), por lo que es recomendable realizar la compra y venta en esos meses.\n")
+else:
+    print(f"El margen de error de ambos meses es igual o mayor a la ganancia, por lo que no se puede asegurar una rentabilidad positiva.\n")
