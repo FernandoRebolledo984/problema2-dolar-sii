@@ -1,5 +1,8 @@
 from punto_flotante import listaErrores as errorAbsoluto, Arreglados_y_Significativos, listaOriginales as valorVerdadero
+from cargar_datos import datos
+from pathlib import Path
 import os
+import csv
 
 os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -21,7 +24,7 @@ while i < len(Arreglados_y_Significativos):
     i+=1
 print(f"\nSiendo el mes de Abril aquel con el mayor error relativo ({round(max_relativo,3)}%).")
 
-#################################################OPERACIONES DE PROPAGACIÓN#################################################
+################## OPERACIONES DE PROPAGACIÓN ##################
 
 monto = 1_000_000
 errorCompra = errorRelativo[0] #Contiene el error relativo del primer mes
@@ -51,7 +54,7 @@ porcentajeErrorGanancia = (errorGanancia/ganancia_real)*100
 
 print(f" - Por lo que las ganancias son: {ganancia_real:.2f} +/- {round(errorGanancia,3)} (o +/- {porcentajeErrorGanancia:.3g}%).")
 
-##################CANCELACIÓN##################
+################## CANCELACIÓN ##################
 #Diciembre 2022 - diciembre 2023
 dif_Dic1_Dic2 = f"{valorVerdadero[23] - valorVerdadero[11]:.3g}"
 dif_Dic1_Dic2_fix = float(dif_Dic1_Dic2)
@@ -60,3 +63,28 @@ errorPrcntl_Dic1_Dic2 = (propAbs_Dic1_Dic2/float(dif_Dic1_Dic2))*100
 print("\n\n=== Respuesta A3. Cancelación ===\n")
 print(f" - Diferencia entre ambos meses: {abs(dif_Dic1_Dic2_fix)}\n - Error absoluto (+/-): {round(propAbs_Dic1_Dic2,3)} ")
 print(" - Debido a que la diferencia verdadera entre ambos meses es menor al error absoluto se puede concluir que no se puede afirmar si subió o bajó.\n")
+
+################## EXPORTACIÓN DE TABLA DE ERRORES ##################
+
+ruta_data = Path(__file__).resolve().parent.parent / "data"     #Buscamos la carpeta "data"
+ruta_salida = ruta_data / "tabla_errores.csv"                   #Ruta del archivo a crear
+
+#Abrimos el archivo en modo escritura
+with open(ruta_salida, mode='w', newline='', encoding='utf-8') as archivo_csv:
+    escritor = csv.writer(archivo_csv, delimiter=',')
+    
+    escritor.writerow(["Mes", "Año", "Precio_aprox", "Error_absoluto", "Error_relativo_porcentual"])
+    
+    m = 0
+    while m < len(Arreglados_y_Significativos):
+        #Accedemos al mes y año desde la lista original de datos (datos)
+        mes = datos[m][1]
+        anio = datos[m][0]
+        precio = Arreglados_y_Significativos[m]
+        err_abs = round(errorAbsoluto[m], 5)
+        err_rel = round(errorRelativo[m], 5)
+        
+        escritor.writerow([mes, anio, precio, err_abs, err_rel])
+        m += 1
+
+print(f"\nTabla de errores guardada en: {ruta_salida}")
