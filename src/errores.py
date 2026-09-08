@@ -3,6 +3,8 @@ from cargar_datos import datos
 from pathlib import Path
 import os
 import csv
+import matplotlib.pyplot as plt
+from punto_flotante import deriva_ida_vuelta
 
 os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -88,3 +90,102 @@ with open(ruta_salida, mode='w', newline='', encoding='utf-8') as archivo_csv:
         m += 1
 
 print(f"Tabla de errores creada y guardada en 'data'.\n")
+
+################## CREACIÓN DE GRÁFICOS ##################
+
+ruta_graficos = Path(__file__).resolve().parent.parent / "graficos"
+
+#Eje X (Mes Año)
+etiquetas = []
+i = 0
+while i < len(datos):
+    etiquetas.append(f"{datos[i][1][:3]} {datos[i][0]}")
+    i += 1
+
+#Gráfica 1: Serie mensual
+plt.figure(figsize=(10, 5))
+plt.plot(etiquetas, valorVerdadero, label='Original')
+plt.plot(etiquetas, Arreglados_y_Significativos, label='Aproximado')
+plt.title('Serie mensual del dólar observado')
+plt.xticks(rotation=90)
+plt.legend()
+plt.tight_layout()
+plt.savefig(ruta_graficos / "serie_mensual_1.png")
+plt.close()
+
+#Lógica para la gráfica 2
+variaciones = []
+errores_propagados_resta = []
+etiquetas_g2 = []
+k=1
+while k < len(Arreglados_y_Significativos):
+    variacion = Arreglados_y_Significativos[k] - Arreglados_y_Significativos[k-1]
+    err_prop = errorAbsoluto[k] + errorAbsoluto[k-1] 
+    variaciones.append(variacion)
+    errores_propagados_resta.append(err_prop)
+    etiquetas_g2.append(f"{datos[k][1][:3]} - {datos[k-1][1][:3]}")
+    k+=1
+
+#Gráfica 2: Variación mes a mes
+plt.figure(figsize=(10, 5))
+plt.bar(etiquetas_g2, variaciones, label='Variación (\u0394P)', alpha=0.7)
+plt.bar(etiquetas_g2, errores_propagados_resta, label='Error propagado', color='red', alpha=0.5)
+plt.title('Variación mes a mes y error (Cancelación)')
+plt.xticks(rotation=90, fontsize=8)
+plt.legend()
+plt.tight_layout()
+plt.savefig(ruta_graficos / "variacion_cancelacion_2.png")
+plt.close()
+
+#Gráfica 3: Error de representación
+plt.figure(figsize=(10, 5))
+plt.bar(etiquetas, errorAbsoluto, color='orange')
+plt.title('Error de representación mensual absoluto')
+plt.xticks(rotation=90)
+plt.tight_layout()
+plt.savefig(ruta_graficos / "error_representacion_3.png")
+plt.close()
+
+#Lógica para la gráfica 4
+precio_minimo = min(Arreglados_y_Significativos)
+idx_min = Arreglados_y_Significativos.index(precio_minimo)
+rentabilidades = []
+errores_rentabilidad = []
+etiquetas_g4 = []
+j = idx_min + 1
+while j < len(Arreglados_y_Significativos):
+    usd = monto / precio_minimo
+    pesos_final = usd * Arreglados_y_Significativos[j]
+    ganancia = pesos_final - monto
+    rent = (ganancia / monto) * 100
+    
+    err_rel_mult = errorRelativo[idx_min] + errorRelativo[j]
+    err_abs_pesos = (err_rel_mult / 100) * pesos_final
+    err_rent = (err_abs_pesos / monto) * 100
+    
+    rentabilidades.append(rent)
+    errores_rentabilidad.append(err_rent)
+    etiquetas_g4.append(etiquetas[j])
+    j += 1
+
+#Gráfica 4: Rentabilidad
+plt.figure(figsize=(10, 5))
+plt.bar(etiquetas_g4, rentabilidades, yerr=errores_rentabilidad, color='skyblue', edgecolor='black', ecolor='red', capsize=4)
+plt.axhline(0, color='black', linewidth=1)
+plt.title('Rentabilidad (%) comprando en el mínimo histórico')
+plt.xticks(rotation=90)
+plt.tight_layout()
+plt.savefig(ruta_graficos / "rentabilidad_minimo_4.png")
+plt.close()
+
+#Gráfica 5: Deriva
+plt.figure(figsize=(10, 5))
+plt.plot(etiquetas, deriva_ida_vuelta, color='purple')
+plt.axhline(0, color='black', linewidth=1)
+plt.title('Deriva del ciclo ida y vuelta')
+plt.xticks(rotation=90)
+plt.tight_layout()
+plt.savefig(ruta_graficos / "deriva_ida_vuelta_5.png")
+plt.close()
+
+print("Gráficos creados y generados en la carpeta 'gráficos'\n")
