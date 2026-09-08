@@ -87,4 +87,4 @@ with open(ruta_salida, mode='w', newline='', encoding='utf-8') as archivo_csv:
         escritor.writerow([mes, anio, precio, err_abs, err_rel])
         m += 1
 
-print(f"\nTabla de errores guardada en: {ruta_salida}")
+print(f"Tabla de errores creada y guardada en 'data'.\n")
