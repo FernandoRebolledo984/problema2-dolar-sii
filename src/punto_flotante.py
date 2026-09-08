@@ -16,3 +16,5 @@ listaErrores = []
 while i < len(datos["dolar_observado_promedio_clp"]):
     listaErrores.append(abs(listaOriginales[i] - Arreglados_y_Significativos[i]))
     i = i+1
+
+
