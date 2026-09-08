@@ -10,12 +10,16 @@ while i < len(Arreglados_y_Significativos):
     errorRelativo.append((errorAbsoluto[i]/valorVerdadero[i])*100)
     i = i+1
 
+#Búsqueda del mes con el mayor error relativo
+max_relativo = max(errorRelativo)
+
 print("\n=== Respuesta A1. Error de representación mes a mes ===")
 print("\n|= Precios =|= Error absoluto =|= Error porcentual =|")
 i = 0
 while i < len(Arreglados_y_Significativos):
     print(f"|=  {Arreglados_y_Significativos[i]}  =|=      {round(errorAbsoluto[i],3)}      =|=       {round(errorRelativo[i],3)}      =|")
     i+=1
+print(f"\nSiendo el mes de Abril aquel con el mayor error relativo ({round(max_relativo,3)}%).")
 
 #################################################OPERACIONES DE PROPAGACIÓN#################################################
 

@@ -1,5 +1,7 @@
 from pathlib import Path
 import numpy as np
+import matplotlib.pyplot as plt
+import os
 
 rutaCSV = Path(__file__).resolve().parent.parent/ "data" / "dolar_observado_sii_2022_2025.csv"
 

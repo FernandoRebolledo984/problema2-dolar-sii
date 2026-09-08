@@ -1,9 +1,8 @@
 from cargar_datos import datos
 import os
-#original - aproximacion
 os.system('cls' if os.name == 'nt' else 'clear')
-listaOriginales = []
 
+listaOriginales = []
 for num in datos["dolar_observado_promedio_clp"]:
     listaOriginales.append(float(num))
 
@@ -16,5 +15,4 @@ listaErrores = []
 while i < len(datos["dolar_observado_promedio_clp"]):
     listaErrores.append(abs(listaOriginales[i] - Arreglados_y_Significativos[i]))
     i = i+1
-
-
+    

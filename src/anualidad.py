@@ -1,11 +1,6 @@
-from punto_flotante import Arreglados_y_Significativos, listaErrores
+from punto_flotante import Arreglados_y_Significativos, listaErrores, listaOriginales
 import os
 os.system('cls' if os.name == 'nt' else 'clear')
-
-#De enero a dic de cada año cuanto ganó o perdió el dolar ...
-#Para poder verlo tenemos que restar enero - dic de cada año, tomando los índices correspondientes de 
-#cada elemento en la lista
-
 
 enero_anios = [Arreglados_y_Significativos[0],Arreglados_y_Significativos[12],Arreglados_y_Significativos[24],Arreglados_y_Significativos[36]]
 diciembre_anios = [Arreglados_y_Significativos[11],Arreglados_y_Significativos[23], Arreglados_y_Significativos[35],Arreglados_y_Significativos[47]]
@@ -59,9 +54,42 @@ while x<len(ulti):
         z+=1
         anio+=1
 
-print("\n========== DIFERENCIAS ENE-DIC Y SUS ERRORES CORRESPONDIENTES ==========")
-print("===== Porcentajes orenados de menor a mayor =====\n")
+print("\n=== Respuesta A4. Anualidad (variación enero->diciembre) ===")
 h=0
 while h < len(ulti2):
-    print(f" - Año: {ulti2[h][3]}\n - Error Absoluto Enero-Diciembre: {ulti2[h][0]}\n - Propagación de Error: {round(ulti2[h][1],5)}\n - Error Relativo Porcentual: {round(ulti2[h][2],3)}%\n")
+    print(f" - Año: {ulti2[h][3]}\n - Error Absoluto Enero-Diciembre: {ulti2[h][0]}")
+    print(f" - Propagación de Error: {round(ulti2[h][1],5)}\n - Error Relativo Porcentual: {round(ulti2[h][2],3)}%\n")
     h+=1
+print("Lo común de ambos años es que su error absoluto llega a ser igual o mayor que la propia diferencia entre ambos, provocando que" \
+"el error relativo porcentual sea muy alto, invalidando la certeza del resultado (cancelación catastrófica).\n")
+
+#=============================== Respuesta A5 ===============================
+print("\n=== Respuesta A5. Mejor compra y mejor venta ===\n")
+
+monto = 1_000_000
+precio_mes_barato = min(listaOriginales)   #Mes más barato del período
+precio_mes_caro = max(listaOriginales)     #Mes más caro del período
+indice_barato = listaOriginales.index(precio_mes_barato)
+indice_caro = listaOriginales.index(precio_mes_caro)
+#mes_barato = 
+#anio_barato =
+
+#Rentabilidad
+compra_barato = monto / precio_mes_barato    #Compramos en el mes más barato
+vende_caro = compra_barato * precio_mes_caro #Vendemos en el mes más caro
+ganancia = vende_caro-monto        
+rentabilidad = (ganancia / monto)*100 #Porcentaje de rentabilidad
+
+#Errores relativos y absolutos de ambos meses
+error_relativo_barato = (listaErrores[indice_barato] / precio_mes_barato)*100
+error_absoluto_barato = abs((precio_mes_barato - Arreglados_y_Significativos[indice_barato]))
+error_relativo_caro = (listaErrores[indice_caro] / precio_mes_caro)*100
+error_absoluto_caro = (precio_mes_caro - Arreglados_y_Significativos[indice_caro])
+#Error relativo y absoluto de la venta
+error_relativo_venta = error_relativo_barato + error_relativo_caro
+error_absoluto_venta = (error_relativo_venta / 100) * vende_caro
+
+error_absoluto_ganancia = error_absoluto_venta
+error_absoluto_rentabilidad = (error_absoluto_ganancia / monto)*100
+
+print(error_absoluto_rentabilidad)
